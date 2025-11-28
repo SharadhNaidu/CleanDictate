@@ -5,7 +5,7 @@ Intelligent Dictation Engine with real-time speech-to-text, filler removal, and 
 ## Requirements
 
 - Python 3.10+
-- NVIDIA GPU with CUDA support
+- Intel i5+ / AMD5+
 - Windows 10/11
 
 ## Installation
