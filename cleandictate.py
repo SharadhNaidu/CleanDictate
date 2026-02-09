@@ -1,23 +1,6 @@
-"""
-╔════════════════════════════════════════════════════════════════════════════════╗
-║                              CLEANDICTATE                                      ║
-║                    Production Mission Control for Dictation                    ║
-║                                                                                ║
-║  Architecture: Brutalist UI + Dual-Model NLP + Split-Core Engine              ║
-║  Hardware: NVIDIA RTX 4070 (CUDA + Float16)                                   ║
-║  Designer: Senior Python Full-Stack Architect                                 ║
-╚════════════════════════════════════════════════════════════════════════════════╝
-
-SYSTEM OVERVIEW:
-================
-1. GUI Layer: Tkinter "Paper Terminal" - High-Contrast Brutalist Design
-2. NLP Brain: Dual-Model Pipeline (Correction → Creation)
-3. Engine Core: Split-Mode (Live Stream vs Batch Document)
-4. Hardware: GPU-accelerated with thread-safe coordination
-"""
 
 import os
-# Bypass PyTorch 2.6+ security warning for trusted model weights
+
 os.environ['TORCH_LOAD_SAFE_TENSORS_ONLY'] = '0'
 
 import numpy as np
@@ -36,12 +19,7 @@ from faster_whisper import WhisperModel
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from pynput import keyboard
 from pynput.keyboard import Controller as KeyboardController, Key
-from scipy import signal  # For audio resampling
-
-
-# =============================================================================
-# UTILITY: CONSOLE REDIRECTION TO GUI
-# =============================================================================
+from scipy import signal  
 
 class ConsoleRedirector:
     """
@@ -54,9 +32,7 @@ class ConsoleRedirector:
         self.queue = queue.Queue()
         self.is_running = True
         self._original_stdout = sys.__stdout__
-        # Regex to strip ANSI escape codes
         self._ansi_pattern = re.compile(r'\x1b\[[0-9;]*m')
-        # Start polling for updates
         self._poll()
         
     def write(self, message):
